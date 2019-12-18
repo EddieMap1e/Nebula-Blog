@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../public/img/icon.ico">
+		<title id="indexTitle">-Nebula-</title>
+		<link rel="stylesheet" href="../layui/css/layui.css">
+		<script src="../layui/layui.js" type="text/javascript"></script>
+		<script src="../public/js/jquery.js" type="text/javascript"></script>
+		<script src="../public/js/vue.js" type="text/javascript"></script>
+		<script src="../public/components/topBar.js" type="text/javascript"></script>
+		<script src="../public/components/alert.js" type="text/javascript"></script>
+		<script src="../public/components/background.js" type="text/javascript"></script>
+		<script src="../public/components/zButton.js" type="text/javascript"></script>
+		<script src="../public/components/jumpTop.js" type="text/javascript"></script>
+		<script src="../public/components/footerBar.js" type="text/javascript"></script>
+		<script src="components/infoedit.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="NebulaMain">
+			<alert v-if="alertshow">{{alertmsg}}</alert>
+			<background src="./img/homeBG.jpg"></background>
+			<topbar :nickname="userdata.nickname_Top"></topbar>
+			<div :style="containerStyle">
+				<div name="space" style="height:70px"></div>
+				<infoedit :userdata="userdata"></infoedit>
+			</div>
+			<jumptop></jumptop>
+			<footerbar></footerbar>
+		</div>
+	</body>
+	<script type="text/javascript">
+		vue=new Vue({
+			el:'#NebulaMain',
+			data:{
+				alertshow:false,
+				alertmsg:'',
+				containerStyle:{
+					width:'600px',
+					height:'auto',
+					margin:'0 auto 50px auto'
+				},
+				userdata:{
+					nickname:'',
+					motto:'',
+					userid:'',
+					gender:'',
+					hobby:'',
+					QQ:'',
+					location:'',
+					blogname:'',
+					nickname_Top:'',
+					username:'',
+					tel:'',
+					mail:''
+				}
+			},
+			methods:{
+				alert:function(msg){
+					this.alertmsg=msg;
+					this.alertshow=true;
+				},
+				getUserData:function(){
+					var userdata=this.userdata;
+					$.post("../public/php/getUserData.php",function(data,status){
+						if(data.nickname=="登录/注册"){
+							alert('你调皮了哦');
+							window.alert_ok=function(){
+								window.alert_ok=function(){};
+								window.location.href=("../home");
+							}
+							return;
+						}
+						userdata.nickname=data.nickname;
+						userdata.motto=data.motto;
+						userdata.userid=data.userid;
+						userdata.gender=data.gender;
+						userdata.hobby=data.hobby;
+						userdata.location=data.location;
+						userdata.blogname=data.blogname;
+						userdata.QQ=data.QQ;
+						userdata.nickname_Top=data.nickname;
+						userdata.username=data.username;
+						userdata.tel=data.tel;
+						userdata.mail=data.mail;
+						$('#indexTitle').text("修改信息 - "+data.nickname);
+					},"json")
+				}
+			},
+			mounted() {
+				window.alert=this.alert;
+				window.alert_ok=function(){};
+			},
+			created() {
+				this.getUserData();
+			}
+		})
+	</script>
+	<script type="text/javascript">
+		layui.use('element',function(){})
+	</script>
+</html>
