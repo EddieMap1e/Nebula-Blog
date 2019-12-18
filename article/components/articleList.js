@@ -172,7 +172,7 @@ Vue.component('articlelist',{
 			if(delId==0)$('.layui-icon-delete').on("click",deleteArticle);
 		},
 		addclick:function(){
-			window.location.href="./post";
+			window.location.href="./post.html";
 		}
 	},
 	mounted() {

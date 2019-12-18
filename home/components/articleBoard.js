@@ -25,7 +25,7 @@ var getAllArt=function(){
 		$.each(data,function(key,value){
 			if(typeof(value)=="object")
 				$('#showAllArt').append(
-				'<a href="../article/detail?id='+value["art_id"]+'">'+
+				'<a href="../article/detail.html?id='+value["art_id"]+'">'+
 				'<div onmouseover={$(event.target).css("color","DeepSkyBlue");} '+
 				'onmouseleave={$(event.target).css("color","black");} '+
 				'style="line-height:20px;font-size:20px;margin:30px 20px;'+
@@ -65,7 +65,7 @@ getMyArt=function(){
 		$.each(data,function(key,value){
 			if(typeof(value)=="object")
 				$('#showMyArt').append(
-				'<a href="../article/detail?id='+value["art_id"]+'">'+
+				'<a href="../article/detail.html?id='+value["art_id"]+'">'+
 				'<div onmouseover={$(event.target).css("color","DeepSkyBlue");} '+
 				'onmouseleave={$(event.target).css("color","black");} '+
 				'style="line-height:20px;font-size:20px;margin:30px 20px;'+

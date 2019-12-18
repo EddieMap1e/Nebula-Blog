@@ -100,7 +100,7 @@ Vue.component('topbar',{
 		},
 		personal_info:function(){
 			event.stopPropagation();
-			window.location.href="../home/info"
+			window.location.href="../home/info.html"
 		},
 		message:function(){
 			event.stopPropagation();
