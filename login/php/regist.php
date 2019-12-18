@@ -29,7 +29,7 @@
 	$res2=mInsert('user_detail',"null,'$username','$username 的小天地','','男','','',''");
 	if($res&&$res2){
 		mkdir("../../user/$username");
-		mkdir("../../user/$username/img")
+		mkdir("../../user/$username/img");
 		$res=copy("../../public/img/defaultProfilePhoto.jpg","../../user/$username/ProfilePhoto.jpg");
 		if($res)echo "注册成功";
 		else echo "注册成功可是初始化头像失败了qwq";
