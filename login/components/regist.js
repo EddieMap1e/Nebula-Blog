@@ -103,7 +103,7 @@ Vue.component('regist',{
 				alert("手机号码不能为空");
 				return;
 			}
-			if(!(/^1[34578]\d{9}$/.test(this.tel))||this.tel.length!=11){
+			if(!(/^1[345789]\d{9}$/.test(this.tel))||this.tel.length!=11){
 				alert("请填写正确的11位手机号码");
 				return;
 			}

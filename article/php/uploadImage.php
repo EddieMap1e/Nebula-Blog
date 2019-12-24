@@ -15,11 +15,12 @@
 		if(file_exists($url))
 		{
 			$status=0;
-			$msg="这个名字的图片已经存在啦,在文件地址写上'../../user/你的用户名/img/'+文件名使用哦 ovo";
+			$msg="这个名字的图片已经存在啦,在文件地址写上'../user/你的用户名/img/'+文件名使用哦 ovo";
 		}
 		else{
 			move_uploaded_file($tmp,$url);
 		}
+		$url="../user/".$_COOKIE['username']."/img/".$name;
 	}
 	else $status=0;
 	echo json_encode(array(

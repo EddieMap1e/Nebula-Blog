@@ -86,6 +86,10 @@
 				},
 				postArticle:function(){
 					var t=this.articleTitle;
+					if(t.trim()==""){
+						alert("title not null!");
+						return;
+					}
 					var a=this.userdata.nickname;
 					var c=window.myeditor.getMarkdown();
 					$.post("./php/postArticle.php",{
