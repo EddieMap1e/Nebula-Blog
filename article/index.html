@@ -15,30 +15,46 @@
 		<script src="../public/components/jumpTop.js" type="text/javascript"></script>
 		<script src="../public/components/footerBar.js" type="text/javascript"></script>
 		<script src="components/articleList.js" type="text/javascript"></script>
+		<style type="text/css">
+			.layui-icon-loading{
+				font-size: 80px;
+				color: deepskyblue;
+			}
+			#loading{
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				margin-left: -40px;
+				margin-top: -40px;
+			}
+		</style>
 	</head>
 	<body>
-		<div id="NebulaMain">
+		<div id="loading"><i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i></div>
+		<div id="Nebula" style="display: none;">
 			<alert v-if="alertshow">{{alertmsg}}</alert>
-			<background src="https://s2.ax1x.com/2019/12/18/QHycJe.jpg"></background>
+			<background src="./img/homeBG.jpg" display="none"></background>
 			<topbar :nickname="userdata.nickname_Top"></topbar>
-			<div :style="containerStyle">
+			<div :style="containerStyle" id="container">
 				<div name="space" style="height:70px"></div>
 				<articlelist></articlelist>
 			</div>
 			<jumptop></jumptop>
 			<footerbar></footerbar>
 		</div>
+		
 	</body>
 	<script type="text/javascript">
 		vue=new Vue({
-			el:'#NebulaMain',
+			el:'#Nebula',
 			data:{
 				alertshow:false,
 				alertmsg:'',
 				containerStyle:{
 					width:'920px',
 					height:'auto',
-					margin:'0 auto 20px auto'
+					margin:'0 auto 20px auto',
+					display:'none'
 				},
 				userdata:{
 					nickname_Top:''
@@ -70,6 +86,17 @@
 		})
 	</script>
 	<script type="text/javascript">
-		layui.use('element',function(){})
+		layui.use('element',function(){});
+		var loadloop=setInterval(function(){
+			var img=$('#background').css('background-image');
+			if(typeof(img)!="undefined"&&img!='none')
+			{
+				clearInterval(loadloop);
+				$('#loading').hide();
+				$('#Nebula').show();
+				$('#background').fadeIn(1500);
+				setTimeout(function(){$('#container').fadeIn(1000);},1500);
+			}
+		},200);
 	</script>
 </html>

@@ -16,7 +16,6 @@ Vue.component('background',{
 	data:function() {
 		return{
 			bgStyle:{
-				backgroundImage:'url('+ this.src +')',
 				position:this.position,
 				top:'0',
 				left:'0',
@@ -31,6 +30,14 @@ Vue.component('background',{
 				backgroundPosition:'center 0',
 				display:this.display
 			}
+		}
+	},
+	mounted() {
+		var src=this.src;
+		var bgImg=new Image();
+		bgImg.src=src;
+		bgImg.onload=function(){
+			$('#background').css('background-image','url('+src+')');
 		}
 	},
 	template:'<div :style="bgStyle" id="background"></div>'
