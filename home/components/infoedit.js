@@ -109,7 +109,7 @@ Vue.component('infoedit',{
 			  size:'2388.992',
 			  done: function(res){
 				  if(res['status']=="ok"){
-					  $('#profilephoto').attr("src",res['path']);
+					  $('#profilephoto').attr("src",""+res['path']+"?"+Math.random());
 					  alert('更换成功啦');
 				  }
 				  else{
