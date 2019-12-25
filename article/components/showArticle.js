@@ -68,6 +68,9 @@ Vue.component('showarticle',{
 				$('.editormd-html-preview').css('background-color','rgba(255,255,255,0.3)')
 				.css('min-height','700px')
 				.css('border-radius','20px');
+				$('pre code').each(function(i,block){
+					hljs.highlightBlock(block);
+				})
 			},"json");
 		}
 	},

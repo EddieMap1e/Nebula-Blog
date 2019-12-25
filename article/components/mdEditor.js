@@ -28,6 +28,7 @@ Vue.component('mdeditor',{
 				},
 				onload:function(){
 					this.unwatch();
+					$('.CodeMirror').css('margin-top','');
 					//this.setMarkdown();
 				},
 				imageUpload:true,

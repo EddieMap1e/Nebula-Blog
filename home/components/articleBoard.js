@@ -114,6 +114,14 @@ Vue.component('articleboard',{
 				width:'600px',
 				boxShadow:'lightblue 0 0 20px 10px',
 				cursor:'default'
+			},
+			addStyle:{
+				position:'relative',
+				top:'-805px',
+				left:'700px',
+				color:'deepskyblue',
+				fontSize:'20px',
+				cursor:'pointer'
 			}
 		}
 	},
@@ -129,6 +137,9 @@ Vue.component('articleboard',{
 			$('#mycard').css("background-color","rgba(255,255,255,0.5)");
 			$('#showAllArt').hide();
 			$('#showMyArt').show();
+		},
+		addclick:function(){
+			window.location.href="../article/post.html";
 		}
 	},
 	mounted() {
@@ -144,5 +155,6 @@ Vue.component('articleboard',{
 		'<span id="mycard" :style="cardStyle" @click="myartclick">我的文章</span>'+
 		'<div id="showAllArt" :style="listStyle"></div>'+
 		'<div id="showMyArt" :style="listStyle"></div>'+
+		'<i class="layui-icon layui-icon-add-circle" :style="addStyle" @click="addclick"></i>'+
 	'</div>'
 })

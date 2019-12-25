@@ -1,6 +1,6 @@
 var pageAll=1;
 var pageMy=1;
-var delId=0;
+var delId=-1;
 function deleteArticle(event){
 	var id=$(event.target).attr("name");
 	if(id==delId)
@@ -56,8 +56,8 @@ var getAllArt=function(){
 				'style="line-height:25px;font-size:20px;margin:30px 20px;'+
 				'border-left:thick double lightskyblue;padding:0 0 0 20px;cursor:pointer">'+
 					value['title']+
-					'<span style="float:right;;color:lightgray;font-size:8px;'+
-					'line-height:25px" onmouseleave={$(event.target).css("color","lightgray");} '+
+					'<span style="float:right;;color:black;font-size:8px;'+
+					'line-height:25px" onmouseleave={$(event.target).css("color","black");} '+
 					' onmouseover={event.stopPropagation();$(event.target).css("color","purple");}>'+
 					value['author']+"&nbsp;&nbsp;&nbsp;&nbsp;"+value['date']+'</span>'+
 				'</div></a>'
@@ -96,8 +96,8 @@ getMyArt=function(){
 				'style="line-height:25px;font-size:20px;margin:30px 20px;'+
 				'border-left:thick double lightskyblue;padding:0 0 0 20px;cursor:pointer">'+
 					value['title']+
-					'<span style="float:right;;color:lightgray;font-size:8px;'+
-					'line-height:25px" onmouseleave={$(event.target).css("color","lightgray");} '+
+					'<span style="float:right;;color:black;font-size:8px;'+
+					'line-height:25px" onmouseleave={$(event.target).css("color","black");} '+
 					'onmouseover={event.stopPropagation();$(event.target).css("color","purple");}>'+value['date']+'</span>'+
 				'</div></a>'
 				);
@@ -169,7 +169,10 @@ Vue.component('articlelist',{
 			if($('.layui-icon-delete').css('display')=="none")
 				$('.layui-icon-delete').css('display','');
 			else $('.layui-icon-delete').css('display','none');
-			if(delId==0)$('.layui-icon-delete').on("click",deleteArticle);
+			if(delId==-1){
+				$('.layui-icon-delete').on("click",deleteArticle);
+				delId=0;
+			}
 		},
 		addclick:function(){
 			window.location.href="./post.html";

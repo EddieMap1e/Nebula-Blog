@@ -98,11 +98,30 @@ Vue.component('infoedit',{
 				$('#profilephoto').attr("src","../user/"+this.userdata.username+"/ProfilePhoto.jpg");
 				clearInterval(showPhoto);
 			}
-		},1);
+		},100);
+		layui.use('upload',function(){
+			var upload = layui.upload;
+			var uploadInst = upload.render({
+			  elem: '#profilephoto',
+			  url: './php/uploadPhoto.php',
+			  accept:'images',
+			  acceptMime: 'image/jpeg,image/png',
+			  size:'2388.992',
+			  done: function(res){
+				  if(res['status']=="ok"){
+					  $('#profilephoto').attr("src",res['path']);
+					  alert('更换成功啦');
+				  }
+				  else{
+					  alert('更换失败了诶');
+				  }
+			  }
+			});
+		})
 	},
 	template:
 	'<div :style="bgStyle">'+
-		'<center><img style="height:100px;width:100px;cursor:pointer" id="profilephoto" alt="假装有头像" title="戳我更换头像" class="layui-nav-img"></center>'+
+		'<center><img style="height:100px;width:100px;cursor:pointer" id="profilephoto" alt="假装有头像"  src="../public/img/defaultProfilePhoto.jpg" title="戳我更换头像" class="layui-nav-img"></center>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">&nbsp;&nbsp;邮&nbsp;&nbsp;&nbsp;&nbsp;箱</div><input :style="inputStyle" type="text" disabled="true" v-model=userdata.mail /></div>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">&nbsp;&nbsp;手&nbsp;&nbsp;&nbsp;&nbsp;机</div><input :style="inputStyle" type="text" disabled="true" v-model=userdata.tel /></div>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">用&nbsp;&nbsp;户&nbsp;&nbsp;名</div><input :style="inputStyle" type="text" disabled="true" v-model=userdata.username /></div>'+

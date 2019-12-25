@@ -85,11 +85,11 @@ Vue.component('userinfoboard',{
 				$('#profilephoto').attr("src","../user/"+this.userdata.username+"/ProfilePhoto.jpg");
 				clearInterval(showPhoto);
 			}
-		},1);
+		},100);
 	},
 	template:
 	'<div :style="bgStyle">'+
-		'<img style="height:100px;width:100px" alt="假装有头像" id="profilephoto" class="layui-nav-img">'+
+		'<img style="height:100px;width:100px" alt="假装有头像" id="profilephoto" src="../public/img/defaultProfilePhoto.jpg" class="layui-nav-img">'+
 		'<div style="width:150px;height:100px;float:right">'+
 			'<b style="font-family:微软雅黑;font-size:18px;line-height:50px">{{userdata.nickname}}</b>'+
 			'<p style="font-size:13px;height:45px;font-family:宋体">{{userdata.motto}}</p>'+
