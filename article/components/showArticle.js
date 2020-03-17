@@ -12,6 +12,7 @@ Vue.component('showarticle',{
 				title:'Welcome but 你麋鹿了',
 				author:'Nebula',
 				date:'forever',
+				uid:0,
 				authorMotto:'只要你不调皮 我就和你玩',
 				authorPhotoPath:'../public/img/defaultProfilePhoto.jpg'
 			},
@@ -83,6 +84,7 @@ Vue.component('showarticle',{
 			var artdata=this.data;
 			var id=this.artid;
 			var update=this.mdToHTML;
+			var func=this.getAuthorData;
 			$.post("./php/getArticleData.php",{
 				artid:id
 			},function(data,status){
@@ -91,22 +93,28 @@ Vue.component('showarticle',{
 					artdata['title']=data['title'];
 					artdata['author']=data['author'];
 					artdata['date']=data['date'];
+					artdata['uid']=data['uid'];
 					$('#contentText').text(data['content']);
 					$('#indexTitle').text(""+data['title']+" - "+data['author']+" - Nebula");
 				}
+				else alert(data);
 				update();
 				$('.editormd-html-preview').css('background-color','rgba(255,255,255,0.3)')
 				.css('min-height','700px')
 				.css('border-radius','20px');
 				$('pre code').each(function(i,block){
 					hljs.highlightBlock(block);
-				})
+				});
+				func();
 			},"json");
 		},
 		getAuthorData:function(){
 			var authorData=this.data;
-			$.post("../public/php/getUserData.php",function(data,status){
-				if(data.nickname=="登录/注册"){
+			$.post("../public/php/getUserDataByID.php",{
+				uid:authorData.uid
+			},function(data,status){
+				if(typeof(data)!='object'){
+					alert(data);
 					return;
 				}
 				authorData['authorMotto']=data['motto'];
@@ -122,7 +130,6 @@ Vue.component('showarticle',{
 	},
 	created() {
 		this.getArtData();
-		this.getAuthorData();
 	},
 	template:
 	'<div>'+
