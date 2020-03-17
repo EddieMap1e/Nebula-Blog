@@ -11,7 +11,9 @@ Vue.component('showarticle',{
 			data:{
 				title:'Welcome but 你麋鹿了',
 				author:'Nebula',
-				date:'forever'
+				date:'forever',
+				authorMotto:'只要你不调皮 我就和你玩',
+				authorPhotoPath:'../public/img/defaultProfilePhoto.jpg'
 			},
 			titleStyle:{
 				textAlign:'center',
@@ -33,8 +35,36 @@ Vue.component('showarticle',{
 				fontSize:'9px'
 			},
 			contentStyle:{
-				width:'800px',
+				width:'760px',
 				margin:'auto'
+			},
+			authorInfoStyle:{
+				height:'130px',
+				width:'800px',
+				backgroundColor:'rgba(255,255,255,0.3)',
+				borderRadius:'20px',
+				margin:'30px auto 0 auto'
+			},
+			authorPhotoStyle:{
+				height:'100px',
+				width:'100px',
+				position:'relative',
+				top:'50%',
+				marginTop:'-50px',
+				left:'10%'
+			},
+			authorNameStyle:{
+				fontSize:'20px',
+				position:'relative',
+				top:'35%',
+				left:'7%',
+				color:'white',
+				backgroundColor:'skyBlue'
+			},
+			authorMottoStyle:{
+				position:'relative',
+				top:'33%',
+				left:'12%',
 			}
 		}
 	},
@@ -72,10 +102,27 @@ Vue.component('showarticle',{
 					hljs.highlightBlock(block);
 				})
 			},"json");
+		},
+		getAuthorData:function(){
+			var authorData=this.data;
+			$.post("../public/php/getUserData.php",function(data,status){
+				if(data.nickname=="登录/注册"){
+					return;
+				}
+				authorData['authorMotto']=data['motto'];
+				authorData['authorPhotoPath']='../user/'+data['username']+'/ProfilePhoto.jpg?'+Math.random();
+			},"json")
+		},
+		focusClick:function(){
+			alert("关注功能");
+		},
+		mailClick:function(){
+			alert("私信功能");
 		}
 	},
 	created() {
 		this.getArtData();
+		this.getAuthorData();
 	},
 	template:
 	'<div>'+
@@ -88,6 +135,13 @@ Vue.component('showarticle',{
 			'# 我能吞下玻璃\n## 而不傷身體\n> 並非所有流浪者都迷失了自我\n'+
 			'\n```c++\nprint("hello world");\nprint("hello Nebula");\n```\n'+
 			'`仰望天堂吧`\n\n$$E=mc^2$$\n\n- [ ] 成为强大的人儿吧\n- [x] 你不是垃圾</textarea>'+
+		'</div>'+
+		'<div id="authorInfo" :style="authorInfoStyle">'+
+			'<b :style="authorNameStyle">{{data.author}}</b>'+
+			'<img :style="authorPhotoStyle" alt="假装有头像" :src="data.authorPhotoPath" class="layui-nav-img">'+
+			'<i :style="authorMottoStyle">{{data.authorMotto}}</i>'+
+			'<zbutton float="right" margin="50px 40px 50px 0" h="30px" w="50px" bgcolor="deepSkyBlue" shadowcolor="skyBlue" :click="mailClick" >私信</zbutton>'+
+			'<zbutton float="right" margin="50px 20px 50px 0" h="30px" w="50px" bgcolor="red" shadowcolor="tomato" :click="focusClick" >关注</zbutton>'+
 		'</div>'+
 	'</div>'
 })

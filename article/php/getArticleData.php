@@ -6,7 +6,7 @@
 		echo json_encode("连接数据库失败");
 		exit;
 	}
-	$data=mGetRow_r("select title,author,content,date from article where art_id='$artid'");
+	$data=mGetRow_r("select uid,title,author,content,date from article where art_id='$artid'");
 	if(!$data)echo json_encode("没有这篇文章");
 	else {
 		$ret=[];
@@ -14,6 +14,7 @@
 		$ret['author']=$data['author'];
 		$ret['content']=$data['content'];
 		$ret['date']=$data['date'];
+		$ret['uid']=$data['uid'];
 		echo json_encode($ret);
 	}
 ?>

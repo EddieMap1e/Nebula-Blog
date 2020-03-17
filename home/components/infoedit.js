@@ -57,6 +57,18 @@ Vue.component('infoedit',{
 				alert('博客名不能为空哦~');
 				return;
 			}
+			if(userdata.nickname.trim().length>7){
+				alert('哎呀 名字太长可不好 最多七个字哦');
+				return;
+			}
+			if(userdata.motto.trim().length>16){
+				alert('看来你的心事重重呢 开心点 16字以内的心情叭~');
+				return;
+			}
+			if(userdata.blogname.trim().length>12){
+				alert('你的博客名太长啦 12个字以内好了');
+				return;
+			}
 			$.post('./php/infoChange.php',{
 				nickname:userdata.nickname.trim(),
 				blogname:userdata.blogname.trim(),
@@ -105,7 +117,7 @@ Vue.component('infoedit',{
 			  elem: '#profilephoto',
 			  url: './php/uploadPhoto.php',
 			  accept:'images',
-			  acceptMime: 'image/jpeg,image/png',
+			  acceptMime: 'image/jpeg',
 			  size:'2388.992',
 			  done: function(res){
 				  if(res['status']=="ok"){
@@ -127,7 +139,7 @@ Vue.component('infoedit',{
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">用&nbsp;&nbsp;户&nbsp;&nbsp;名</div><input :style="inputStyle" type="text" disabled="true" v-model=userdata.username /></div>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">用&nbsp;户&nbsp;&nbsp;i&nbsp;d</div><input :style="inputStyle" type="text" disabled="true" v-model=userdata.userid /></div>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">&nbsp;&nbsp;昵&nbsp;&nbsp;&nbsp;&nbsp;称</div><input maxlength="8" :style="inputStyle" type="text" v-model=userdata.nickname /></div>'+
-		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">博&nbsp;&nbsp;客&nbsp;&nbsp;名</div><input maxlength="12" :style="inputStyle" type="text" v-model=userdata.blogname /></div>'+
+		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">博&nbsp;&nbsp;客&nbsp;&nbsp;名</div><input maxlength="15" :style="inputStyle" type="text" v-model=userdata.blogname /></div>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">个性签名</div><input maxlength="20" :style="inputStyle" type="text" v-model=userdata.motto /></div>'+
 		'<div :style="lineStyle"><div onselectstart="return false" :style="tagStyle">&nbsp;&nbsp;性&nbsp;&nbsp;&nbsp;&nbsp;别</div><div style="line-height:30px"><input id="male" type="radio" value="男" v-model=userdata.gender />'+
 		'<label for="male">男</label>&nbsp;&nbsp;&nbsp;&nbsp;<input id="female" type="radio" value="女" v-model=userdata.gender /><label for="female">女</label></div></div>'+

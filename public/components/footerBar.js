@@ -23,7 +23,7 @@ Vue.component('footerbar',{
 	template:
 	'<div :style="footerStyle" @mouseenter="enter" @mouseleave="leave" id="footerbar">'+
 		'<div id="time">'+new Date().toLocaleString()+'</div>'+
-		'Copyright &copy; 2019 EddieMap1e . All Rights Reserved .'+
+		'<div>Copyright &copy; 2019-2020 EddieMap1e All Rights Reserved.<a href="http://www.beian.miit.gov.cn/">粤ICP备20016557号</a></div>'+
 	'</div>',
 	methods:{
 		enter:function(){
