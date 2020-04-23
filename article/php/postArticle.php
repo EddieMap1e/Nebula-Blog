@@ -3,6 +3,8 @@
 	$author=isset($_POST['author'])?htmlspecialchars($_POST['author']):'';
 	$content=isset($_POST['content'])?$_POST['content']:'';
 	$uid=$_COOKIE['userid'];
+	$content = addslashes($content);
+	$title = addslashes($title);
 	if(!$uid){
 		echo json_encode("wrong");
 		exit;
