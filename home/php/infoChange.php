@@ -18,6 +18,7 @@
 		exit;
 	}
 	$res=mUpdate('user_detail',"nickname='$nickname',gender='$gender',blogname='$blogname',motto='$motto',hobby='$hobby',location='$location',QQ='$QQ'","uid=$uid");
-	if($res)echo json_encode("ok");
+	$res2=mUpdate('article',"author='$nickname'","uid=$uid");
+	if($res&&$res2)echo json_encode("ok");
 	else echo json_encode("wrong");
 ?>
