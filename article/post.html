@@ -96,6 +96,11 @@
 							}
 							return;
 						}
+						window.onbeforeunload=function(e){
+							e=e||window.event;
+							if(e)e.returnValue="离开将不会对您的内容进行保存哦!"
+							return "离开将不会对您的内容进行保存哦!";
+						}
 						userdata.nickname=data.nickname;
 						userdata.nickname_Top=data.nickname;
 					},"json")
