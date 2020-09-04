@@ -90,13 +90,13 @@ getMyArt=function(){
 		$.each(data,function(key,value){
 			if(typeof(value)=="object"){
 				$('#showMyArt').append(
-				'<a href="../article/detail.html?id='+value["art_id"]+'">'+
+				'<a class="artTitle" href="../article/detail.html?id='+value["art_id"]+'">'+
 				'<div onmouseover={$(event.target).css("color","DeepSkyBlue");} '+
 				'onmouseleave={$(event.target).css("color","black");} '+
 				'style="line-height:25px;font-size:20px;margin:30px 20px;'+
 				'border-left:thick double lightskyblue;padding:0 0 0 20px;cursor:pointer">'+
 					value['title']+
-					'<span style="float:right;;color:black;font-size:8px;'+
+					'<span class="artDate" style="float:right;;color:black;font-size:8px;'+
 					'line-height:25px" onmouseleave={$(event.target).css("color","black");} '+
 					'onmouseover={event.stopPropagation();$(event.target).css("color","purple");}>'+value['date']+'</span>'+
 				'</div></a>'
@@ -105,6 +105,12 @@ getMyArt=function(){
 				'<i class="layui-icon layui-icon-delete" style="'+
 				'position:relative;float:right;top:-54px;left:20px;font-size:20px;color:pink;'+
 				'display:none;cursor:pointer" name="'+value["art_id"]+'"></i>'
+				);
+				$('#showMyArt').append(
+				'<a href="../article/edit.html?id='+value["art_id"]+'">'+
+				'<i class="layui-icon layui-icon-edit" style="'+
+				'position:relative;float:right;top:-54px;left:-10px;font-size:20px;color:pink;'+
+				'display:none;cursor:pointer" name="'+value["art_id"]+'"></i></a>'
 				)
 			}
 		})
@@ -166,9 +172,20 @@ Vue.component('articlelist',{
 			$('.layui-icon-set').show();
 		},
 		setclick:function(){
-			if($('.layui-icon-delete').css('display')=="none")
+			if($('.layui-icon-delete').css('display')=="none"){
+				$('.layui-icon-edit').css('display','');
 				$('.layui-icon-delete').css('display','');
-			else $('.layui-icon-delete').css('display','none');
+				$('.artDate').css('display','none');
+				$('.artTitle').css('pointer-events','none');
+				$('.artTitle').css('cursor','default');
+			}
+			else {
+				$('.layui-icon-edit').css('display','none');
+				$('.layui-icon-delete').css('display','none');
+				$('.artDate').css('display','');
+				$('.artTitle').css('pointer-events','');
+				$('.artTitle').css('cursor','pointer');
+			}
 			if(delId==-1){
 				$('.layui-icon-delete').on("click",deleteArticle);
 				delId=0;

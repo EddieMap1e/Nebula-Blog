@@ -1,6 +1,13 @@
 Vue.component('mdeditor',{
+	props:{
+		edit:{
+			type:String,
+			default:""
+		}
+	},
 	methods:{
 		init:function(){
+			var edit=this.edit;
 			window.myeditor=editormd("editor", {
 				placeholder:'支持全部Markdown语法哦~ \nEnjoy Writing~',
 				width: "1100px",
@@ -29,7 +36,7 @@ Vue.component('mdeditor',{
 				onload:function(){
 					this.unwatch();
 					$('.CodeMirror').css('margin-top','');
-					//this.setMarkdown();
+					if(edit.length)this.setMarkdown(edit);
 				},
 				imageUpload:true,
 				imageFormats:["jpg", "jpeg", "gif", "png", "bmp", "webp"],
