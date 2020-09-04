@@ -35,7 +35,7 @@ var getAllArt=function(){
 		'<div id="allpage" style="top:860px;width:800px;margin:auto;'+			
 		'position:absolute;text-align:center;line-height:30px">'+
 		'<span style="cursor:pointer;color:purple" onclick={pageAll=1;getAllArt();}>&nbsp;首页&nbsp;</span>'+
-		'<span style="cursor:pointer;color:purple" onclick={pageAll='+data["maxPageNum"]+';getAllArt();}>&nbsp;尾页&nbsp;</span><br/'+
+		'<span style="cursor:pointer;color:purple" onclick={pageAll='+data["maxPageNum"]+';getAllArt();}>&nbsp;尾页&nbsp;</span><br/>'+
 		'</div>'
 		);
 		if(pageAll!=1)$('#allpage').append('<span style="cursor:pointer;color:purple" onclick={pageAll--;getAllArt();}>上一页</span>');
@@ -75,7 +75,7 @@ getMyArt=function(){
 		'<div id="mypage" style="top:860px;width:800px;margin:auto;'+			
 		'position:absolute;text-align:center;line-height:30px">'+
 		'<span style="cursor:pointer;color:purple" onclick={pageMy=1;getMyArt();}>&nbsp;首页&nbsp;</span>'+
-		'<span style="cursor:pointer;color:purple" onclick={pageMy='+data["maxPageNum"]+';getMyArt();}>&nbsp;尾页&nbsp;</span><br/'+
+		'<span style="cursor:pointer;color:purple" onclick={pageMy='+data["maxPageNum"]+';getMyArt();}>&nbsp;尾页&nbsp;</span><br/>'+
 		'</div>'
 		);
 		if(pageMy!=1)$('#mypage').append('<span style="cursor:pointer;color:purple" onclick={pageMy--;getMyArt();}>上一页</span>');

@@ -18,7 +18,7 @@
 		$uid=$_COOKIE['userid'];
 		$p=(int)$_POST['page'];
 		$limit=($p-1)*10;
-		$maxp=floor(mGetCount('article')/10)+1;
+		$maxp=floor(mGetCount('article',"uid='$uid'")/10)+1;
 		$list=mGetAll_r("select art_id,title,date from article where uid='$uid' order by art_id DESC limit $limit,10");
 		$list['maxPageNum']=$maxp;
 		echo json_encode($list);
