@@ -1,3 +1,4 @@
+var scrollBefore = $(window).scrollTop();
 Vue.component('topbar',{
 	props:{
 		nickname:{
@@ -50,7 +51,7 @@ Vue.component('topbar',{
 				height:'25px',
 				lineHeight:'25px',
 				margin:'3px 2px'
-			}
+			},
 		}
 	},
 	template:
@@ -121,5 +122,13 @@ Vue.component('topbar',{
 		homeclick:function(){
 			window.location.href="../home";
 		}
+	},
+	mounted() {
+		$(window).scroll(function(){
+			if($(window).scrollTop()>scrollBefore)
+				$('#topbar').hide();
+			else $('#topbar').show();
+			scrollBefore=$(window).scrollTop();
+		})
 	},
 })
