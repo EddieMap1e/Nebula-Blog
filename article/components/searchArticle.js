@@ -9,11 +9,11 @@ var getResult=function(){
 		$('#result').append(
 		'<div id="page" style="top:860px;width:800px;margin:auto;'+			
 		'position:absolute;text-align:center;line-height:30px">'+
-		'<span style="cursor:pointer;color:purple" onclick={page=1;getAllArt();}>&nbsp;首页&nbsp;</span>'+
-		'<span style="cursor:pointer;color:purple" onclick={page='+data["maxPageNum"]+';getAllArt();}>&nbsp;尾页&nbsp;</span><br/>'+
+		'<span style="cursor:pointer;color:purple" onclick={page=1;getResult();}>&nbsp;首页&nbsp;</span>'+
+		'<span style="cursor:pointer;color:purple" onclick={page='+data["maxPageNum"]+';getResult();}>&nbsp;尾页&nbsp;</span><br/>'+
 		'</div>'
 		);
-		if(page!=1)$('#page').append('<span style="cursor:pointer;color:purple" onclick={page--;getAllArt();}>上一页</span>');
+		if(page!=1)$('#page').append('<span style="cursor:pointer;color:purple" onclick={page--;getResult();}>上一页</span>');
 		for(var i=1;i<=data['maxPageNum'];i++){
 			if(i+5<page||i-5>page)continue;
 			if(i!=page)$('#page').append(
