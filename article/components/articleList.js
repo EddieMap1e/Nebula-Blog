@@ -116,11 +116,10 @@ getMyArt=function(){
 		})
 	},"json");
 };
-var pageAll = 1;
-var pageMy = 1;
 Vue.component('articlelist',{
 	data:function(){
 		return{
+			search:'',
 			cardStyle:{
 				backgroundColor:'rgba(255,255,255,0.2)',
 				padding:'10px 20px',
@@ -153,6 +152,25 @@ Vue.component('articlelist',{
 				color:'firebrick',
 				fontSize:'20px',
 				cursor:'pointer'
+			},
+			inputStyle:{
+				width:'240px',
+				height: '18px',
+				padding:'3px 6px',
+				border:'1px solid transparent',
+				borderRadius:'6px',
+			},
+			searchStyle:{
+				position:'relative',
+				top:'-915px',
+				left:'320px'
+			},
+			buttonStyle:{
+				verticalAlign:'middle',
+				marginLeft:'10px',
+				fontSize:'20px',
+				color:'skyblue',
+				cursor:'pointer',
 			}
 		}
 	},
@@ -193,7 +211,16 @@ Vue.component('articlelist',{
 		},
 		addclick:function(){
 			window.location.href="./post.html";
-		}
+		},
+		searchClick:function(){
+			window.location.href="./search.html?keyword="+this.search;
+		},
+		listenkey:function(event){
+			var e=event||window.event||arguments.callee.caller.arguments[0];
+			if(e&&e.keyCode==13){
+				this.searchClick();
+			}
+		},
 	},
 	mounted() {
 		$('#allcard').css("background-color","rgba(255,255,255,0.5)");
@@ -209,5 +236,9 @@ Vue.component('articlelist',{
 		'<div id="showMyArt" :style="listStyle"></div>'+
 		'<i class="layui-icon layui-icon-add-circle" :style="addStyle" @click="addclick"></i>'+
 		'<i class="layui-icon layui-icon-set" :style="setStyle" @click="setclick"></i>'+
+		'<div :style="searchStyle">'+
+			'<input name="search" v-model="search" type="text" placeholder="标题/用户/关键字" :style="inputStyle" @keydown="listenkey">'+
+			'<i class="layui-icon layui-icon-search" :style="buttonStyle" @click="searchClick"></i>'+
+		'</div>'+
 	'</div>'
 })
