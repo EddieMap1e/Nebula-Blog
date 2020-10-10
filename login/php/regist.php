@@ -22,7 +22,7 @@
 	}
 	$is_exited=mGetRow('user_info',"tel='$tel'");
 	if($is_exited){
-		echo "你可以使用该邮箱登录了哦";
+		echo "你可以使用该手机号码登录了哦";
 		exit;
 	}
 	$res=mInsert('user_info',"null,'$username','$password','$tel','$mail'");

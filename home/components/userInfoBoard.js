@@ -61,7 +61,7 @@ Vue.component('userinfoboard',{
 			alert('相册功能');
 		},
 		boardGo:function(){
-			alert('留言功能');
+			window.location.href="../Q&A";
 		},
 		appGo:function(){
 			alert('应用功能');
@@ -110,7 +110,7 @@ Vue.component('userinfoboard',{
 				'<div @click="articleGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-align-left" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文章</div>'+
 				'<div @click="friendGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-friends" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好友</div>'+
 				'<div @click="albumGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-camera" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相册</div>'+
-				'<div @click="boardGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-form" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;留言</div>'+
+				'<div @click="boardGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-form" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问答</div>'+
 				'<div @click="appGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-app" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;应用</div>'+
 			'</div>'+
 			'<h4 style="font-size:11px;">友链</h4>'+

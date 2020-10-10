@@ -3,15 +3,27 @@ Vue.component('mdeditor',{
 		edit:{
 			type:String,
 			default:""
+		},
+		placeholder:{
+			type:String,
+			default:"支持全部Markdown语法哦~ \nEnjoy Writing~"
+		},
+		width:{
+			type:String,
+			default:"1100px"
+		},
+		height:{
+			type:String,
+			default:"700px"
 		}
 	},
 	methods:{
 		init:function(){
 			var edit=this.edit;
 			window.myeditor=editormd("editor", {
-				placeholder:'支持全部Markdown语法哦~ \nEnjoy Writing~',
-				width: "1100px",
-				height:'700px',
+				placeholder: this.placeholder,
+				width: this.width,
+				height: this.height,
 				syncScrolling: "single",  
 				path: "../editormd/lib/",
 				theme: "default",
@@ -40,7 +52,7 @@ Vue.component('mdeditor',{
 				},
 				imageUpload:true,
 				imageFormats:["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-				imageUploadURL:"./php/uploadImage.php",
+				imageUploadURL:"../public/php/uploadImage.php",
 				toolbarIconsClass:{
 					Henshin:"fa-star"
 				},

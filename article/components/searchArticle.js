@@ -68,7 +68,8 @@ Vue.component('searcharticle',{
 			searchStyle:{
 				position:'relative',
 				top:'-890px',
-				left:'320px'
+				left:'320px',
+				width:'850px'
 			},
 			buttonStyle:{
 				verticalAlign:'middle',

@@ -107,7 +107,7 @@ Vue.component('infoedit',{
 		var showPhoto=setInterval(function(){
 			if(userdata.username!='')
 			{
-				$('#profilephoto').attr("src","../user/"+this.userdata.username+"/ProfilePhoto.jpg");
+				$('#profilephoto').attr("src","../user/"+this.userdata.username+"/ProfilePhoto.jpg?"+Math.random());
 				clearInterval(showPhoto);
 			}
 		},100);

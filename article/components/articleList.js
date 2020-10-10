@@ -163,7 +163,8 @@ Vue.component('articlelist',{
 			searchStyle:{
 				position:'relative',
 				top:'-915px',
-				left:'320px'
+				left:'320px',
+				width:'850px'
 			},
 			buttonStyle:{
 				verticalAlign:'middle',
