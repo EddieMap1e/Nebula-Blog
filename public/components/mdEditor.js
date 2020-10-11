@@ -15,6 +15,10 @@ Vue.component('mdeditor',{
 		height:{
 			type:String,
 			default:"700px"
+		},
+		theme:{
+			type:String,
+			default:"mdn-like"
 		}
 	},
 	methods:{
@@ -28,7 +32,7 @@ Vue.component('mdeditor',{
 				path: "../editormd/lib/",
 				theme: "default",
 				previewTheme: "default",
-				editorTheme: "mdn-like",
+				editorTheme: this.theme,
 				saveHTMLToTextarea: true,
 				emoji: false,
 				taskList: true, 

@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="referrer" content="no-referrer">
 		<link rel="icon" href="../public/img/icon.ico">
 		<title id="indexTitle">-Nebula-</title>
 		<link rel="stylesheet" href="../layui/css/layui.css">
@@ -15,21 +14,11 @@
 		<script src="../public/components/zButton.js" type="text/javascript"></script>
 		<script src="../public/components/jumpTop.js" type="text/javascript"></script>
 		<script src="../public/components/footerBar.js" type="text/javascript"></script>
-		<script src="../public/components/mdEditor.js" type="text/javascript"></script>
-		<script src="components/showQA.js" type="text/javascript"></script>
+		<script src="./components/QASearch.js" type="text/javascript"></script>
 		
+		<script src="../public/components/mdEditor.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="../editormd/css/editormd.css" />
 		<script src="../editormd/editormd.min.js"></script>
-		<script src="../editormd/lib/marked.min.js"></script>
-		<script src="../editormd/lib/prettify.min.js"></script>
-		<script src="../editormd/lib/raphael.min.js"></script>
-		<script src="../editormd/lib/underscore.min.js"></script>
-		<script src="../editormd/lib/sequence-diagram.min.js"></script>
-		<script src="../editormd/lib/flowchart.min.js"></script>
-		<script src="../editormd/lib/jquery.flowchart.min.js"></script>
-		
-		<link rel="stylesheet" href="../public/css/vs.css" />
-		<script src="../public/js/highlight.pack.js"></script>
 		
 		<style type="text/css">
 			.layui-icon-loading{
@@ -53,18 +42,17 @@
 			<topbar :nickname="userdata.nickname_Top"></topbar>
 			<div :style="containerStyle" id="container">
 				<div name="space" style="height:70px"></div>
-				<div style="height:auto;padding:40px;border-radius: 20px;background-color: rgba(242,243,239,0.7);">
-					<i onclick={window.location.href="./"} class="layui-icon layui-icon-return" style="color:darkred;font-size:25px;cursor:pointer"></i>
-					<showqa :qid="qid"></showqa>
-				</div>
-				<div name="space" style="height:25px"></div>
-				<mdeditor width="900px" height="300px" placeholder="大大大神快来帮帮忙吧~" theme="blackboard"></mdeditor>
-				<zButton w="80px" float="right" :click="postA">回答</zButton>
-				<div name="space" style="height:50px"></div>
+				<qasearch :search="search"></qasearch>
+				<input type="text" id="QTitle" v-model="QTitle" placeholder="描述清楚你的问题哦~" :style="QTitleStyle" maxlength="25">
+				<mdeditor width="920px" height="400px" placeholder="用Markdown更清晰描述问题哦~" theme="blackboard"></mdeditor>
+				<zButton bgcolor="red" shadowcolor="rgba(255,0,0,0.6)" w="120px"
+				float="right" :click="postQ">提问</zButton>
+				<div name="space" style="height:70px"></div>
 			</div>
 			<jumptop></jumptop>
 			<footerbar></footerbar>
 		</div>
+		
 	</body>
 	<script type="text/javascript">
 		vue=new Vue({
@@ -73,15 +61,27 @@
 				alertshow:false,
 				alertmsg:'',
 				containerStyle:{
-					width:'900px',
+					width:'920px',
 					height:'auto',
-					margin:'0 auto 50px auto',
+					margin:'0 auto 20px auto',
 					display:'none'
 				},
 				userdata:{
 					nickname_Top:''
 				},
-				qid:''
+				QTitleStyle:{
+					backgroundColor:'rgba(240,240,255,0.5)',
+					margin:'0 0 20px 0',
+					border:'none',
+					padding:'8px 25px',
+					borderRadius:'20px',
+					height:'30px',
+					width:'500px',
+					fontSize:'20px'
+				},
+				QTitle:'',
+				QContent:'',
+				search:'',
 			},
 			methods:{
 				alert:function(msg){
@@ -98,6 +98,39 @@
 						userdata.nickname_Top=data.nickname;
 					},"json")
 				},
+				postQ:function(){
+					var t=this.QTitle;
+					if(t.trim()==""){
+						alert("问题标题为空怎么能行捏?");
+						return;
+					}
+					var a=this.userdata.nickname_Top;
+					if(a=="登录/注册"){
+						alert('没登录问个锤子呢!');
+						window.alert_ok=function(){
+							window.alert_ok=function(){};
+							window.location.href="../login";
+						}
+					}
+					var c=window.myeditor.getMarkdown();
+					$.post("./php/QPost.php",{
+						title:t,
+						content:c,
+						author:a
+					},function(data,status){
+						if(data=="ok"){
+							alert('成功提问了呢~');
+							window.alert_ok=function(){
+								window.alert_ok=function(){};
+								window.location.href="../Q&A";
+							}
+						}
+						else if(data=="same"){
+							alert('你已经提过这个问题了!')
+						}
+						else alert('未知原因提问失败qwq');
+					},"json");
+				},
 				getQueryVariable:function(variable){
 				       var query = window.location.search.substring(1);
 				       var vars = query.split("&");
@@ -105,41 +138,12 @@
 				               var pair = vars[i].split("=");
 				               if(pair[0] == variable){return pair[1];}
 				       }
-				       return(false);
+				       return '';
 				},
-				getQId:function(){
-					this.qid=parseInt(this.getQueryVariable('id'));
+				getSearch:function(){
+					this.search=this.getQueryVariable('keyword');
+					this.search=decodeURI(this.search);
 				},
-				postA:function(){
-					var a=this.userdata.nickname_Top;
-					if(a=="登录/注册"){
-						alert("先登录再回答叭~做好事要留名~");
-						window.alert_ok=function(){
-							window.alert_ok=function(){};
-							window.location.href="../login";
-						}
-					}
-					var c=window.myeditor.getMarkdown();
-					if(c.trim()==""){
-						alert("这是要让别人看天书的节奏吗?");
-						return;
-					}
-					var id=this.qid;
-					$.post("./php/APost.php",{
-						content:c,
-						qid:id,
-						author:a
-					},function(data,status){
-						if(data=="ok"){
-							alert('成功回答了呢~');
-							window.alert_ok=function(){
-								window.alert_ok=function(){};
-								window.location.reload();
-							}
-						}
-						else alert('未知原因回答失败qwq');
-					},"json");
-				}
 			},
 			mounted() {
 				window.alert=this.alert;
@@ -147,7 +151,7 @@
 			},
 			created() {
 				this.getUserData();
-				this.getQId();
+				this.getSearch();
 			}
 		})
 	</script>
