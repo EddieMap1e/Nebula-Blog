@@ -55,7 +55,7 @@ Vue.component('userinfoboard',{
 			window.location.href="../home";
 		},
 		friendGo:function(){
-			alert('好友功能');
+			window.location.href="../chat";
 		},
 		albumGo:function(){
 			alert('相册功能');
@@ -109,7 +109,7 @@ Vue.component('userinfoboard',{
 				'<div @click="homeGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-home" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首页</div>'+
 				'<div @click="articleGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-align-left" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文章</div>'+
 				'<div @click="boardGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-form" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问答</div>'+
-				'<div @click="friendGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-friends" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好友(正在开发)</div>'+
+				'<div @click="friendGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-friends" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;聊天</div>'+
 				'<div @click="albumGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-camera" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相册(正在开发)</div>'+
 				'<div @click="appGo" @mouseover="indexOver" @mouseleave="indexLeave" :style="indexStyle"><i @mouseover="None" class="layui-icon layui-icon-app" style="color:navy"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;应用(正在开发)</div>'+
 			'</div>'+
